@@ -29,6 +29,7 @@ export const fetchUserById = async (id: number): Promise<User | null> => {
   return data as User;
 };
 
+// タスク1-1で使用する関数
 export const createUser = async (user: Omit<User, 'id' | 'deleted'>): Promise<User> => {
   const { data, error } = await supabase
     .from('dev_users')
