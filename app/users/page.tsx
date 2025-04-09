@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { fetchUsers } from '../../utils/api';
-import { User } from '../../types/User';
-import UserCard from '../../components/UserCard';
+import { User } from '../../types/User'
+import UserList from '@/components/UserList';
 import { Typography, CircularProgress, Alert, Box } from '@mui/material';
 
 const UsersPage: React.FC = () => {
@@ -11,6 +11,7 @@ const UsersPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // 2.一覧ページにアクセスした際にユーザーの一覧を表示する
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -40,9 +41,10 @@ const UsersPage: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         ユーザー一覧
       </Typography>
-      {users.map(user => (
-        <UserCard key={user.id} user={user} />
-      ))}
+      {/* 3.UserListコンポーネントの表示 */}
+      {/* 取得したユーザー情報を UserLIstコンポーネントに渡してレンダリングする
+　         ※propsで渡す */}
+      <UserList users={users} />
     </Box>
   );
 }

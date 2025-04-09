@@ -9,13 +9,13 @@ interface UserListProps {
 // 3.UserListPropsで定義した内容を受け取る　
 const UserList: React.FC<UserListProps> = ({ users }) => {
   return (
-    <div>
+    <>
      {/* 4.UserListPropsで取得したユーザー情報を利用して、UserCardコンポーネントを呼び出す（map利用） */}
      {/* UserList コンポーネント内で fetch は⾏わない */}
       {users.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
-    </div>
+    </>
   );
 };
 
