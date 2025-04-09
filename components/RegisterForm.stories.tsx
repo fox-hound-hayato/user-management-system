@@ -1,5 +1,4 @@
 // components/RegisterForm.stories.tsx
-
 import type { Meta, StoryObj } from "@storybook/react";
 import RegisterForm from "./RegisterForm";
 
@@ -9,6 +8,8 @@ const meta: Meta<typeof RegisterForm> = {
   component: RegisterForm, // 対象コンポーネント
   tags: ["autodocs"], // 自動生成ドキュメント用のタグ
 };
+
+export default meta;
 
 // ストーリーの型定義
 type Story = StoryObj<typeof RegisterForm>;
@@ -21,5 +22,3 @@ export const Default: Story = {
         disabled: false, // ボタンの無効化を解除
     },
 };
-
-export default meta;

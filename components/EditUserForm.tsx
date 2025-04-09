@@ -10,6 +10,7 @@ import { User } from '../types/User'; // User型をインポート
 interface EditUserFormProps {
   userId: number; // ユーザーID
   disabled?: boolean; // ボタンの無効化
+  onSuccess?: () => void; // 成功時のコールバック関数
 }
 
 // フォームの入力データの型を定義
@@ -19,8 +20,7 @@ interface EditUserFormInputs {
   role: string;
 }
 
-// EditUserFormコンポーネントの定義
-const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled }) => {
+const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled, onSuccess }) => {
   const {
     register,
     handleSubmit,
@@ -54,6 +54,9 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled }) => {
   const onSubmit: SubmitHandler<EditUserFormInputs> = async (data) => {
     try {
       await updateUser(userId, data); // APIを使用してユーザー情報を更新
+      if (onSuccess) {
+        onSuccess();
+      }  // 成功時にコールバックを呼び出す
     } catch (err) {
       console.error("ユーザー情報の更新に失敗しました:", err);
       alert("ユーザー情報の更新に失敗しました。");
