@@ -4,7 +4,7 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Typography, } from "@mui/material";
 import { createUser } from "../utils/api";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 // RegisterFormProps インターフェースの定義
 interface RegisterFormProps {
@@ -27,7 +27,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
     formState: { errors },
   } = useForm<RegisterFormInputs>();
 
-  const navigate = useNavigate(); // ページ遷移用
+  // const navigate = useNavigate(); // ページ遷移用　タスク1－3で使用
   
   // フォーム送信時の処理
   const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
@@ -36,7 +36,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
       if (onSuccess) {
         onSuccess(); // 成功時のコールバックを呼び出し
       }
-      navigate("/users"); // ユーザー一覧画面に遷移
+      // navigate("/users"); // ユーザー一覧画面に遷移　タスク1－3で使用
     } catch (error) {
       console.error("登録に失敗しました:", error);
       if (onError) {
