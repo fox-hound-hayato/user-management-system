@@ -27,7 +27,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
     formState: { errors },
   } = useForm<RegisterFormInputs>();
 
-  // const navigate = useNavigate(); // ページ遷移用　タスク1－3で使用
   
   // フォーム送信時の処理
   const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
@@ -36,7 +35,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
       if (onSuccess) {
         onSuccess(); // 成功時のコールバックを呼び出し
       }
-      // navigate("/users"); // ユーザー一覧画面に遷移　タスク1－3で使用
     } catch (error) {
       console.error("登録に失敗しました:", error);
       if (onError) {
@@ -57,7 +55,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
           label="名前"
           fullWidth
           margin="normal"
-          {...register("name", { required: "名前は必須です" })}
+          {...register("name", { 
+            // タスク4-1バリデーションルールを設定
+            required: "名前は必須です", 
+            minLength: { value: 2, message: "名前は2文字以上で入力してください" },
+            maxLength: { value: 10, message: "名前は10文字以内で入力してください" },
+          })}
           error={!!errors.name}
           helperText={errors.name?.message}
         />
@@ -81,7 +84,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onError, disable
           label="ロール"
           fullWidth
           margin="normal"
-          {...register("role", { required: "ロールは必須です" })} 
+          {...register("role", { 
+            required: "ロールは必須です",
+            pattern:{
+              value: /^[a-zA-Z]+$/,
+              message: "ロールは英字のみで入力してください。",
+            },
+          })} 
           error={!!errors.role}
           helperText={errors.role?.message}
         />

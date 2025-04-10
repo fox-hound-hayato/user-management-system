@@ -75,7 +75,12 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled, onSuccess
           label="名前"
           fullWidth
           margin="normal"
-          {...register("name", { required: "名前は必須です。" })}
+          // タスク4-1バリデーションルールを設定
+          {...register("name", { 
+            required: "名前は必須です。",
+            minLength:{ value: 2, message: "名前は2文字以上で入力してください。" },
+            maxLength:{ value: 10, message: "名前は10文字以内で入力してください。" },
+          })}
           error={!!errors.name}
           helperText={errors.name?.message}
         />
@@ -100,7 +105,13 @@ const EditUserForm: React.FC<EditUserFormProps> = ({ userId, disabled, onSuccess
           label="ロール"
           fullWidth
           margin="normal"
-          {...register("role", { required: "ロールは必須です。" })}
+          {...register("role", { 
+            required: "ロールは必須です。", 
+            pattern:{
+              value: /^[a-zA-Z]+$/,
+              message: "ロールは英字のみで入力してください。"
+            }
+          })}
           error={!!errors.role}
           helperText={errors.role?.message}
         />
