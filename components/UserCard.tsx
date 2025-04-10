@@ -1,9 +1,15 @@
-import React from 'react';
-import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
-import { User } from '../types/User';
-import Link from 'next/link';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@mui/material";
+import { User } from "../types/User";
+import Link from "next/link";
 // 2.UserCard コンポーネント内の削除ボタンに DeleteUserButton コンポーネントを入れる
-import DeleteUserButton from './DeleteUserButton';
+import DeleteUserButton from "./DeleteUserButton";
 
 interface UserCardProps {
   user: User;
@@ -17,21 +23,26 @@ const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
         <Typography variant="h5" component="div">
           {user.name}
         </Typography>
-        <Typography color="text.secondary">
-          {user.email}
-        </Typography>
-        <Typography variant="body2">
-          役割: {user.role}
-        </Typography>
+        <Typography color="text.secondary">{user.email}</Typography>
+        <Typography variant="body2">役割: {user.role}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" component={Link} href={`/users/${user.id}/edit`}>編集</Button>
-         {/* 削除ボタンを DeleteUserButton に差し替え */}
-         {/* 2.UserCard コンポーネント内の削除ボタンに DeleteUserButton コンポーネントを入れる */}
-         <DeleteUserButton userId={user.id} onDelete={onDelete} />
+        <Button
+          size="small"
+          component={Link}
+          href={`/users/${user.id}/details`}
+        >
+          詳細
+        </Button>
+        <Button size="small" component={Link} href={`/users/${user.id}/edit`}>
+          編集
+        </Button>
+        {/* 削除ボタンを DeleteUserButton に差し替え */}
+        {/* 2.UserCard コンポーネント内の削除ボタンに DeleteUserButton コンポーネントを入れる */}
+        <DeleteUserButton userId={user.id} onDelete={onDelete} />
       </CardActions>
     </Card>
   );
-}
+};
 
 export default UserCard;
