@@ -1,19 +1,25 @@
+import React, { useState } from "react";
 import { User } from "../types/User";
 import UserCard from "./UserCard";
 
-// 2.UserListPropsインターフェースの定義
+// UserListPropsインターフェースの定義
 interface UserListProps {
   users: User[];
-} 
+}
 
-// 3.UserListPropsで定義した内容を受け取る　
 const UserList: React.FC<UserListProps> = ({ users }) => {
+  // 3.UserListコンポーネントの表示用のデータを用意し、state管理する
+  const [userList, setUserList] = useState<User[]>(users);
+
+  // 3.削除が実行されたらstateが更新される関数を追加（filter使用）
+  const handleDelete = (deletedUserId: number) => {
+    setUserList(userList.filter((user) => user.id !== deletedUserId));
+  };
+
   return (
     <>
-     {/* 4.UserListPropsで取得したユーザー情報を利用して、UserCardコンポーネントを呼び出す（map利用） */}
-     {/* UserList コンポーネント内で fetch は⾏わない */}
-      {users.map((user) => (
-        <UserCard key={user.id} user={user} />
+      {userList.map((user) => (
+        <UserCard key={user.id} user={user} onDelete={handleDelete} />
       ))}
     </>
   );
