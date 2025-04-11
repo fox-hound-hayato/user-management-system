@@ -8,8 +8,6 @@ import {
 } from "@mui/material";
 import { User } from "../types/User";
 import Link from "next/link";
-// 2.UserCard コンポーネント内の削除ボタンに DeleteUserButton コンポーネントを入れる
-// import DeleteUserButton from "./DeleteUserButton";
 import CustomButton from "./parts/CustomButton"; // 1. CustomButtonをインポート
 import { softDeleteUser } from "../utils/api"; // 2. APIをインポート
 
@@ -19,6 +17,7 @@ interface UserCardProps {
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
+  //DeleteUserButtonでの削除処理を実装
   const handleDelete = async () => {
       //削除ボタンを押した際に confirm を使って確認画⾯を表⽰させる
       if (confirm('本当にこのユーザーを削除しますか？')) {
@@ -55,7 +54,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, onDelete }) => {
          {/* 削除ボタンを CustomButton に差し替え */}
          <CustomButton
           variantType="danger"
-          onClick={() => handleDelete()} // 4.削除ボタンのクリックイベント
+          onClick={() => handleDelete()} // 削除ボタンのクリックイベント
         >
           削除
         </CustomButton>
