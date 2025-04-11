@@ -11,7 +11,7 @@ const meta: Meta<typeof CustomCard> = {
   tags: ["autodocs"],
 };
 
-
+export default meta;
 
 // TODO: ストーリーの定義
 type Story = StoryObj<typeof CustomCard>;
