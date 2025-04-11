@@ -4,6 +4,7 @@ import { Box } from "@mui/material"; // Boxをインポート
 import { softDeleteUser } from "../utils/api"; // APIをインポート
 import CustomCard from "./parts/CustomCard"; // UserCard を CustomCard に変更
 import CustomButton from "./parts/CustomButton";
+import CustomModal from "./parts/CustomModal";
 
 // UserListPropsインターフェースの定義
 interface UserListProps {
@@ -13,13 +14,15 @@ interface UserListProps {
 const UserList: React.FC<UserListProps> = ({ users }) => {
   // 3.UserListコンポーネントの表示用のデータを用意し、state管理する
   const [userList, setUserList] = useState<User[]>(users);
+  const [open, setOpen] = useState<boolean>(false); // モーダルの開閉状態を管理するstateを追加
+
 
   // 3.削除が実行されたらstateが更新される関数を追加（filter使用）
-  const handleDelete = async (deletedUserId: number) => {
-    if (confirm("本当にこのユーザーを削除しますか？")) {
+  const handleDelete = async (deletedUserId: number) => { {
       try {
         await softDeleteUser(deletedUserId); // 論理削除を実行
         setUserList(userList.filter((user) => user.id !== deletedUserId));
+        setOpen(false); // モーダルを閉じる
       } catch (error) {
         console.error("ユーザーの削除に失敗しました:", error);
         alert("ユーザーの削除に失敗しました。");
@@ -54,10 +57,17 @@ const UserList: React.FC<UserListProps> = ({ users }) => {
               <CustomButton
                 size="small"
                 variantType="danger"
-                onClick={() => handleDelete(user.id)} // 削除ボタンのクリックイベント
+                onClick={() => setOpen(true)} // 削除ボタンのクリックイベント
               >
                 削除
               </CustomButton>
+              <CustomModal
+                title="削除確認"
+                content={`ユーザー ${user.name} を削除しますか？`}
+                onConfirm={() => handleDelete(user.id)} // 削除ボタンのクリックイベント
+                onClose={() => setOpen(false)}
+                open={open} // モーダルの開閉状態を管理するためのstateを渡す
+                />
             </Box>
           }
         />

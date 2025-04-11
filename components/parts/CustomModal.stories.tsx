@@ -6,7 +6,7 @@ import CustomModal from "./CustomModal";
 import CustomButton from "./CustomButton";
 import { Box } from "@mui/material";
 
-// TODO: メタデータ
+// メタデータ
 const meta: Meta<typeof CustomModal> = {
     title: "Components/CustomModal",
     component: CustomModal,
@@ -15,22 +15,22 @@ const meta: Meta<typeof CustomModal> = {
 
 export default meta;  
 
-// TODO: ストーリーの定義
+// ストーリーの定義
 type Story = StoryObj<typeof CustomModal>;
 
-// TODO: デフォルトストーリーの作成
+// デフォルトストーリーの作成
 export const Default: Story = {
   render: () => {
     const [open, setOpen] = useState(false);
 
     return (
       <Box>
-        {/* // TODO: クリックでモーダル開閉させる */}
+        {/* クリックでモーダル開閉させる */}
         <CustomButton variantType="primary" onClick={() => setOpen(true)}>
           モーダルを開く
         </CustomButton>
         <CustomModal
-        // TODO: Propを渡す
+        // Propを渡す
         open={open} // モーダルの開閉状態を管理するためのstateを渡す
         title="モーダルのタイトル" // モーダルのタイトルを渡す
         content="モーダルの内容" // モーダルの内容を渡す
